@@ -1,0 +1,23 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: saurabh_demo
+  ssh_key: C:/saurabh/security_keys/saurabh_demo.pem
+  region: us-west-2
+  require_chef_omnibus: true
+  instance_type: t2.micro
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: amazon
+    driver:
+        image_id: ami-d0f506b0
+        username: ec2-user
+
+suites:
+  - name: default
+    run_list:
+        - recipe[cicada-haproxy::default]
+    attributes:
